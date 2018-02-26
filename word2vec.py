@@ -4,7 +4,7 @@ import re
 from nltk.corpus import stopwords
 import nltk.data
 import logging
-from gensim.models import word2vec
+from gensim.models import Word2Vec
 
 
 train = pd.read_csv( "labeledTrainData.tsv", header=0, delimiter="\t", quoting=3 )
@@ -65,7 +65,7 @@ context = 10          # Context window size
 downsampling = 1e-3   # Downsample setting for frequent words
 
 print("Training model...")
-model = word2vec.Word2Vec(sentences, workers=num_workers, size=num_features, min_count = min_word_count, window = context, sample = downsampling)
+model = Word2Vec(sentences, workers=num_workers, size=num_features, min_count = min_word_count, window = context, sample = downsampling)
 model.init_sims(replace=True)
-model_name = "300features_40minwords_10context"
+model_name = "word2vec_model"
 model.save(model_name)
